@@ -51,13 +51,23 @@ public:
 		if (i < size && object[i] == NULL) {
 			object[i] = newObject;
 			count++;
-			cout << "void addObject(Object* newObject,int i)\n";
+			cout << "объект добавлен void addObject(Object* newObject,int i) по индексу " << i << endl;
 			cout << "количество элементов в хранилище" << " " << count << endl;
-			cout << "индекс " << i << endl;
 		}
 		else {
-			cout << "Ошибка addObject\n";
-			cout << "индекс " << i << endl;
+			cout << "по индексу " << i << " уже находится элемент" << endl;
+		}
+	}
+	void delObject(int i) {
+		if (object[i] != NULL) {
+			object[i] = NULL;
+			count--;
+			cout << "объект удалился void delObject(int i)  " << "по индексу " << i << endl;
+			cout << "количество элементов в хранилище" << " " << count << endl;
+		}
+		else {
+			cout << "ошибка void delObject(int i)\n";
+			cout << "по индексу " << i << " нет элемента" << endl;
 		}
 	}
 	~Storage() {
@@ -70,9 +80,14 @@ int main()
 	Storage p(10);
 	Object* c = new Cat;
 	p.addObject(c, 5);
+	p.delObject(5);
 	Object* d = new Dog;
 	p.addObject(d, 3);
 	Object* d2 = new Dog;
 	p.addObject(d2, 5);
+	Object* c2 = new Cat;
+	p.addObject(c, 5);
+	p.delObject(2);
+	
 }
 
