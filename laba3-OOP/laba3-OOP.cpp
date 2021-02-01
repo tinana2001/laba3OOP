@@ -32,8 +32,47 @@ public:
 	}
 
 };
+class Storage {
+protected:
+	int size;
+	Object** object;
+public:
+	int count;
+	Storage(int size) {
+		cout << "Storage(int size)\n";
+		this->size = size;
+		count = 0;
+		object = new Object * [size];
+		for (int i = 0; i < size; i++) {
+			object[i] = NULL;
+		}
+	}
+	void addObject(Object* newObject, int i) {
+		if (i < size && object[i] == NULL) {
+			object[i] = newObject;
+			count++;
+			cout << "void addObject(Object* newObject,int i)\n";
+			cout << "количество элементов в хранилище" << " " << count << endl;
+			cout << "индекс " << i << endl;
+		}
+		else {
+			cout << "Ошибка addObject\n";
+			cout << "индекс " << i << endl;
+		}
+	}
+	~Storage() {
+		delete[] object;//удаляются не сами объекты, а ссылки 
+	}
+};
 int main()
 {
-
+	setlocale(LC_ALL, "rus");
+	Storage p(10);
+	Object* c = new Cat;
+	p.addObject(c, 5);
+	Object* d = new Dog;
+	p.addObject(d, 3);
+	Object* d2 = new Dog;
+	p.addObject(d2, 5);
 }
 
